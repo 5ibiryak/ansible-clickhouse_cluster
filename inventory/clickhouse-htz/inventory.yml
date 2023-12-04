@@ -1,0 +1,27 @@
+---
+all:
+  children:
+    clickhouse-cluster:
+      hosts:
+        clickhouse-htz-01:
+          ansible_host: 10.90.20.11
+        clickhouse-htz-02:
+          ansible_host: 10.90.20.12
+        clickhouse-htz-03:
+          ansible_host: 10.90.20.13
+        clickhouse-htz-04:
+          ansible_host: 10.90.20.14
+        clickhouse-htz-05:
+          ansible_host: 10.90.20.15
+        clickhouse-htz-06:
+          ansible_host: 10.90.20.16
+    zookeeper:
+      hosts:
+        clickhouse-htz-01:
+          ansible_host: 10.90.20.11
+        clickhouse-htz-02:
+          ansible_host: 10.90.20.12
+        clickhouse-htz-03:
+          ansible_host: 10.90.20.13
+
+

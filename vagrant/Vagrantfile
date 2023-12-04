@@ -1,0 +1,28 @@
+require "yaml"
+
+hosts = YAML.load_file("hosts.yml")
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "bento/ubuntu-20.04"
+
+
+  hosts.each do |host|
+    config.vm.define host["name"] do |srv|
+      srv.vm.hostname = host["name"]
+
+      srv.vm.provider "virtualbox" do |vb|
+        vb.gui = false
+        vb.cpus = host["resources"]["cpus"]
+        vb.memory = host["resources"]["memory"]
+      end
+
+      host["network"].each do |network|
+        srv.vm.network "private_network", ip: network["ip"]
+      end
+
+      srv.vm.provision "ansible" do |ansible|
+        ansible.playbook = "provision.yml"
+      end
+    end
+  end
+end

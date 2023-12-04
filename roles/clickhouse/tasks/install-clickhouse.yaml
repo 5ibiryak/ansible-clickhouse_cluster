@@ -1,0 +1,31 @@
+- name: add repo key for ClickHouse
+  apt_key:
+    keyserver: "hkp://keyserver.ubuntu.com:80"
+    id: "8919F6BD2B48D754"
+
+- name: add repo for ClickHouse
+  apt_repository:
+    repo: "{{ clickhouse_deb_repo }}"
+    filename: "/etc/apt/sources.list.d/clickhouse.list"
+    state: present
+
+- name: Configure dpkg
+  command: sudo dpkg --configure -a
+
+- name: install Clickhouse server
+  apt:
+    name: 
+      - "clickhouse-server=22.8.18.31"
+      - "clickhouse-common-static=22.8.18.31"
+    state: present
+    force: true
+
+- name: install Clickhouse client
+  apt:
+    name: "clickhouse-client"
+    state: present
+
+- name: ensure that ClickHouse is running
+  systemd:
+    state: started
+    name: clickhouse-server

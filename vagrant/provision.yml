@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: propagate ssh key
+    ansible.posix.authorized_key:
+      user: "{{ item }}"
+      key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+      state: present
+    loop:
+    - root
+    - vagrant

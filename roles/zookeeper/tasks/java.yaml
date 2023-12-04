@@ -1,0 +1,8 @@
+# install java just from source
+
+- name: install java 8
+  apt:
+    name: "{{ java_version }}"
+    state: present
+    force: yes
+    update_cache: yes

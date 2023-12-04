@@ -1,0 +1,11 @@
+
+[clickhouse-cluster]
+clickhouse-htz-01 ansible_host=10.74.204.126  ansible_user=test_user  ansible_ssh_private_key_file=multipass-ssh-key shard=1 replica=1
+clickhouse-htz-02 ansible_host=10.74.204.148  ansible_user=test_user  ansible_ssh_private_key_file=multipass-ssh-key shard=1 replica=2
+
+[zookeeper]
+clickhouse-htz-01 ansible_host=10.74.204.126  ansible_user=test_user  ansible_ssh_private_key_file=multipass-ssh-key
+clickhouse-htz-02 ansible_host=10.74.204.148  ansible_user=test_user  ansible_ssh_private_key_file=multipass-ssh-key
+
+[all:vars]
+enable_cluster=true
